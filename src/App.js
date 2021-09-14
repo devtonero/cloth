@@ -33,6 +33,7 @@ componentDidMount () {
           }
 
           });
+         
       });
     }
     this.setState({currentUser: userAuth})
