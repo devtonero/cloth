@@ -9,3 +9,13 @@ export const addItem = item => ({
     type: CartAct.ADD_ITEMS,
     payload: item
 });
+
+export const removeItem = item => ({
+    type: CartAct.REMOVE_ITEM,
+    payload: item
+});
+
+export const removeItemFromCart = item => ({
+    type: CartAct.CLEAR_ITEM_FROM_CART,
+    payload: item
+});
