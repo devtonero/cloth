@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
-import './header.styles.scss';
+
+
 import { auth } from '../../firebase/firebase';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 
@@ -13,20 +13,21 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.components'
 
 import { connect } from 'react-redux';
 
+import { LogoContainer, HeaderContainer, OptionLink, OptionsContainer } from './header.styles';
 const Header = ({currentUser, hidden}) =>  ( 
-    <div className= 'header'>
-        <Link className='logo-container' to="/">
-            < Logo className='logo'/>
-        </Link>
+    <HeaderContainer >
+        <LogoContainer to="/">
+            < Logo />
+        </LogoContainer >
 
-        <div className='options'>
-            <Link className='option' to='./shop'>SHOPS</Link>
-            <Link className='option' to='./contact'> CONTACT</Link>
+        <OptionsContainer >
+            <OptionLink  to='./shop' >SHOPS</OptionLink>
+            <OptionLink  to='./contact'> CONTACT</OptionLink>
             
             {currentUser? (
-                <div className='option' onClick={()=> auth.signOut()}> SIGN OUT</div>
+                <OptionLink as='div' div  onClick={()=> auth.signOut()}> SIGN OUT</OptionLink>
                )   : (
-                <Link className='option' to='/signin' >SIGN IN</Link>
+                <OptionLink  to='/signin' >SIGN IN</OptionLink>
                )}
             <CartIcon/>
             {
@@ -34,9 +35,9 @@ const Header = ({currentUser, hidden}) =>  (
                 <CartDropdown/>
             }
             
-        </div>
+        </OptionsContainer>
        
-    </div>
+    </HeaderContainer>
     
 )
 

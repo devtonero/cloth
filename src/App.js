@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect} from 'react-router-dom';
+
 import './App.css';
 
 import HomePage from './pages/homepage/homepage.component';
@@ -10,7 +11,6 @@ import checkOutPage from './pages/checkoutpage/checkoutpage';
 
 
 import { auth , createUserProfileDocument} from './firebase/firebase';
-
 
 import { connect } from 'react-redux';
 import {SetCurrentUser} from './redux/user/user.actions';
@@ -39,6 +39,7 @@ componentDidMount () {
             
     }
     SetCurrentUser(userAuth);
+   
   });
 }
 
@@ -49,6 +50,7 @@ componentWillUnmount () {
  render () {
   return (
     <div>
+      
       <Header/>
       <Switch>
       <Route exact path='/' component={HomePage}/>
@@ -56,6 +58,7 @@ componentWillUnmount () {
       <Route  exact path='/signin' render ={()=>this.props.currentUser ? (<Redirect to='/'/>): (<SignInandSignOut/>) } />
       <Route  exact path ='/checkout' component={checkOutPage}/>
       </Switch> 
+    
       
     </div>
   );

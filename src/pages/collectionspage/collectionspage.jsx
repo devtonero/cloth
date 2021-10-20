@@ -6,7 +6,10 @@ import { selectCollection } from '../../redux/shop/shop.selector';
 import './collectionspage.styles.scss';
 
 const CollectionPage = ({ collection }) => {
+  console.log(collection);
+       
   const { title, items } = collection;
+  console.log(collection);
   return (
     <div className='collection-page'>
       <h2 className='title'>{title}</h2>
@@ -21,6 +24,8 @@ const CollectionPage = ({ collection }) => {
 
     const mapStateToProps = (state, ownProps)=> ({
       collection: selectCollection(ownProps.match.params.collectionId)(state)
+      
        });
+       
 
 export default connect(mapStateToProps)(CollectionPage);
