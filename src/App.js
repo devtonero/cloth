@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect} from 'react-router-dom';
 
-import './App.css';
+import { GlobalStyle } from './global.styles';
 
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.components';
@@ -10,7 +10,7 @@ import SignInandSignOut from './pages/sign-in-and-sign-up/sign-in-and-sign-up';
 import checkOutPage from './pages/checkoutpage/checkoutpage';
 
 
-import { auth , createUserProfileDocument} from './firebase/firebase';
+
 
 import { connect } from 'react-redux';
 import {SetCurrentUser} from './redux/user/user.actions';
@@ -24,23 +24,8 @@ class App extends React.Component {
 unsubscribeFromAuth = null;
 
 componentDidMount () {
-  const {SetCurrentUser} = this.props;
-  this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    if (userAuth) {
-      const userRef = await createUserProfileDocument(userAuth);
-
-      userRef.onSnapshot(snapshop => {
-         SetCurrentUser({
-            id: snapshop.id,
-            ...snapshop.data()
-          });
-
-          });
-            
-    }
-    SetCurrentUser(userAuth);
-   
-  });
+  
+  
 }
 
 componentWillUnmount () {
@@ -50,7 +35,7 @@ componentWillUnmount () {
  render () {
   return (
     <div>
-      
+      <GlobalStyle/>
       <Header/>
       <Switch>
       <Route exact path='/' component={HomePage}/>

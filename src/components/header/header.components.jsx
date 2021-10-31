@@ -17,7 +17,7 @@ import { LogoContainer, HeaderContainer, OptionLink, OptionsContainer } from './
 const Header = ({currentUser, hidden}) =>  ( 
     <HeaderContainer >
         <LogoContainer to="/">
-            < Logo />
+            < Logo className='logo'/>
         </LogoContainer >
 
         <OptionsContainer >
@@ -30,16 +30,20 @@ const Header = ({currentUser, hidden}) =>  (
                 <OptionLink  to='/signin' >SIGN IN</OptionLink>
                )}
             <CartIcon/>
+            </OptionsContainer>
             {
                 hidden? null:
                 <CartDropdown/>
             }
             
-        </OptionsContainer>
+        
        
     </HeaderContainer>
-    
-)
+  
+  
+  
+  
+);
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
