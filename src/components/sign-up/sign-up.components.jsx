@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.components';
 import CustomButton from '../custom-buttom/custom-button.components';
 
@@ -6,23 +6,16 @@ import CustomButton from '../custom-buttom/custom-button.components';
 import { connect } from 'react-redux';
 import { signupStart} from '../../redux/user/user.actions';
 
-class SignUp extends  React.Component {
-        constructor(){
-            super();
-            
-            this.state = {
-                displayName:'',
-                email:'',
-                password:'',
-                confirmPassword:''
-
-            };
-        }
-
-        handeleSubmit = async event => {
+const SignUp = ({signupuser}) => {
+    const [userdete, setuserdete]  = useState({
+        displayName:'',
+        email:'',
+        password:'',
+        confirmPassword:''})   
+     const {email, displayName, password, confirmPassword}= userdete;   
+     const handeleSubmit = async event => {
             event.preventDefault();
-            const {signupuser}=this.props;
-            const {email, displayName, password, confirmPassword}=this.state;
+      
             if(password !== confirmPassword){
                 alert("Password Don't Match");
                 return;
@@ -31,24 +24,22 @@ class SignUp extends  React.Component {
 
         }
 
-        handleChange = event =>{
+     const  handleChange = event =>{
             const {name, value}= event.target;
-            this.setState({ [name]: value})
+            setuserdete({...userdete, [name]: value})
         };
 
 
-        render(){
-            const {displayName,email,password, confirmPassword}=this.state;
             return(
                 <div className='sign-up'>
                     <h2>I DO NOT HAVE AN ACCOUNT</h2>
                     <span>SIGN UP WITH YOUR EMAIL AND PASSWORD</span>
-                    <form className='sign-up-form' onSubmit={this.handeleSubmit}>
+                    <form className='sign-up-form' onSubmit={handeleSubmit}>
                         <FormInput
                             type='text'
                             name='displayName'
                             value={displayName}
-                            onChange={this.handleChange}
+                            onChange={handleChange}
                             label='Display Name'
                             required
                             
@@ -59,7 +50,7 @@ class SignUp extends  React.Component {
                             type='text'
                             name='email'
                             value={email}
-                            onChange={this.handleChange}
+                            onChange={handleChange}
                             label='Email'
                             required
                             
@@ -69,7 +60,7 @@ class SignUp extends  React.Component {
                             type='password'
                             name='password'
                             value={password}
-                            onChange={this.handleChange}
+                            onChange={handleChange}
                             label='Password'
                             required
                             
@@ -80,7 +71,7 @@ class SignUp extends  React.Component {
                             type='password'
                             name='confirmPassword'
                             value={confirmPassword}
-                            onChange={this.handleChange}
+                            onChange={handleChange}
                             label='Confirm Password'
                             required
                             
@@ -91,7 +82,7 @@ class SignUp extends  React.Component {
 
                 </div>
             )
-        }
+        
 }
 
 const mapDispatchToProps = dispatch =>( {

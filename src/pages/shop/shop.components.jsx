@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -8,18 +8,13 @@ import CollectionspageContainer from '../collectionspage/collectionpage.containe
 
 import { fetchCollectionStart } from '../../redux/shop/shop.action';
 
-class ShopPage extends React.Component {
+const ShopPage = ({fetchAsync,match})=> {
+
+    useEffect(()=> {
+        fetchAsync();
+    },[fetchAsync]);
 
 
-    componentDidMount() {
-      const {fetchAsync} = this.props;
-      fetchAsync();
-        
-        };
-
-    render(){
-        const {match} = this.props;
-        
         return (
     
                <div className='shop-page'>
@@ -32,7 +27,7 @@ class ShopPage extends React.Component {
         
             </div>
                 );
-    }
+    
 
 } 
 

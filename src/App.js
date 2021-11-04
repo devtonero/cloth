@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Switch, Route, Redirect} from 'react-router-dom';
 
 import { GlobalStyle } from './global.styles';
@@ -18,22 +18,12 @@ import { checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 
-class App extends React.Component {
+const App =({usersession, currentUser}) => {
 
-  
-unsubscribeFromAuth = null;
-
-componentDidMount () {
-  const {usersession} = this.props;
+ useEffect(()=> {
   usersession();
-  
-}
+ },[usersession]);
 
-componentWillUnmount () {
-  this.unsubscribeFromAuth ();
-}
-
- render () {
   return (
     <div>
       <GlobalStyle/>
@@ -41,7 +31,8 @@ componentWillUnmount () {
       <Switch>
       <Route exact path='/' component={HomePage}/>
       <Route  path='/shop' component={ShopPage}/>
-      <Route  exact path='/signin' render ={()=>this.props.currentUser ? (<Redirect to='/'/>): (<SignInandSignOut/>) } />
+      <Route  exact path='/signin' render ={()=>
+        currentUser ? (<Redirect to='/'/>): (<SignInandSignOut/>) } />
       <Route  exact path ='/checkout' component={checkOutPage}/>
       </Switch> 
     
@@ -49,7 +40,7 @@ componentWillUnmount () {
     </div>
   );
 
- }
+ 
  
   
 } 
